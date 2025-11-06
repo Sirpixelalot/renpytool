@@ -128,10 +128,10 @@ python {
 
 ## Architecture
 
-- **Language**: Java (Android app), Python (RPA handling)
+- **Language**: Java, Python
 - **UI Framework**: Material Design 3
 - **Python Integration**: Chaquopy
-- **RPA Library**: Custom `rpatool.py` (based on Ren'Py archive format)
+- **RPA Library**: rpatool.py
 - **File Picker**: Custom RecyclerView-based picker with multi-select
 
 ## Credits
