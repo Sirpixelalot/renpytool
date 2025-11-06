@@ -31,3 +31,8 @@ __pycache__/
 # APK build outputs (optional - uncomment to exclude)
 # *.apk
 # *.aab
+
+# Signing keystore and credentials
+*.keystore
+*.jks
+keystore.properties
