@@ -16,7 +16,7 @@ An Android application to extract and create Ren'Py RPA files directly on your d
 
 ## Requirements
 
-- **Android 11 (API 30) or higher**
+- **Android 11 or higher**
 - **MANAGE_EXTERNAL_STORAGE permission**: Required for direct file system access
 - **Storage**: Enough space for extracted/created archives
 
