@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Check permissions
         checkPermissions();
+
+        // Check for updates
+        checkForUpdates();
     }
 
     private void initViews() {
@@ -695,6 +698,54 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle("Error")
                 .setMessage(message)
                 .setPositiveButton("OK", null)
+                .show();
+    }
+
+    /**
+     * Check for app updates from GitHub releases
+     */
+    private void checkForUpdates() {
+        executorService.execute(() -> {
+            UpdateChecker.checkForUpdates("1.0", new UpdateChecker.UpdateCheckCallback() {
+                @Override
+                public void onUpdateAvailable(VersionInfo versionInfo) {
+                    runOnUiThread(() -> showUpdateDialog(versionInfo));
+                }
+
+                @Override
+                public void onNoUpdateAvailable() {
+                    // Silent - no action needed
+                }
+
+                @Override
+                public void onCheckFailed(String error) {
+                    // Silent fail - don't bother user with network errors
+                }
+            });
+        });
+    }
+
+    /**
+     * Show update available dialog
+     */
+    private void showUpdateDialog(VersionInfo versionInfo) {
+        String message = String.format(
+                "Version %s is now available!\n\nYou are currently using version 1.0.\n\nWould you like to download the update?",
+                versionInfo.getVersionNumber()
+        );
+
+        new AlertDialog.Builder(this)
+                .setTitle("Update Available")
+                .setMessage(message)
+                .setPositiveButton("Update", (dialog, which) -> {
+                    // Open GitHub releases page in browser
+                    android.content.Intent browserIntent = new android.content.Intent(
+                            android.content.Intent.ACTION_VIEW,
+                            android.net.Uri.parse(versionInfo.getDownloadUrl())
+                    );
+                    startActivity(browserIntent);
+                })
+                .setNegativeButton("Later", null)
                 .show();
     }
 

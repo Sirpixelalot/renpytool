@@ -66,6 +66,10 @@ dependencies {
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'androidx.documentfile:documentfile:1.0.1'
     implementation 'com.google.android.material:material:1.11.0'
+
+    // JSON parsing for update checker
+    implementation 'com.google.code.gson:gson:2.10.1'
+
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
