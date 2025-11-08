@@ -94,12 +94,14 @@ python {
 ### Decompiling RPYC Scripts
 
 1. Tap the **"Decompile RPYC"** card
-2. Browse and select one or more `.rpyc` files or folder:
-   - Single tap: Select one file or folder
-   - Long-press: Enter multi-select mode to choose multiple files
+2. Browse and select `.rpyc` files or folders containing scripts:
+   - Single tap: Select individual files or an entire folder (e.g., `/game` folder)
+   - Long-press: Enter multi-select mode to choose multiple files/folders
 3. Select the destination folder (defaults to the folder containing the RPYC files)
 4. Wait for decompilation to complete
 5. Decompiled `.rpy` files will be saved to the chosen directory
+
+**Tip**: Selecting a game's `/game` folder is the fastest way to decompile all scripts at once.
 
 ## Technical Details
 
