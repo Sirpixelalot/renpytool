@@ -94,8 +94,8 @@ python {
 ### Decompiling RPYC Scripts
 
 1. Tap the **"Decompile RPYC"** card
-2. Browse and select one or more `.rpyc` files:
-   - Single tap: Select one file
+2. Browse and select one or more `.rpyc` files or folder:
+   - Single tap: Select one file or folder
    - Long-press: Enter multi-select mode to choose multiple files
 3. Select the destination folder (defaults to the folder containing the RPYC files)
 4. Wait for decompilation to complete
