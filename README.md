@@ -1,4 +1,4 @@
-# Renpytool
+# Rentool
 
 An Android application to extract and create Ren'Py RPA files directly on your device.
 
@@ -40,8 +40,8 @@ An Android application to extract and create Ren'Py RPA files directly on your d
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Renpytool.git
-   cd Renpytool
+   git clone https://github.com/yourusername/Rentool.git
+   cd Rentool
    ```
 
 2. Open the project in Android Studio

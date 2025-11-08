@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="Renpytool"
+            app:title="Rentool"
             app:titleTextColor="?attr/colorOnPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -299,7 +299,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Renpytool allows you to extract and create RPA archives, and decompile RPYC scripts used by Ren'Py visual novels. Tap the cards above to get started."
+                        android:text="Rentool allows you to extract and create RPA archives, and decompile RPYC scripts used by Ren'Py visual novels. Tap the cards above to get started."
                         android:textSize="14sp" />
 
                 </LinearLayout>

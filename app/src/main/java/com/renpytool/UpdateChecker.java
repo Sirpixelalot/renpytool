@@ -16,7 +16,7 @@ import java.net.URL;
 public class UpdateChecker {
 
     private static final String TAG = "UpdateChecker";
-    private static final String GITHUB_API_URL = "https://api.github.com/repos/Sirpixelalot/renpytool/releases/latest";
+    private static final String GITHUB_API_URL = "https://api.github.com/repos/Sirpixelalot/Rentool/releases/latest";
     private static final int TIMEOUT_MS = 10000;  // 10 seconds
 
     public interface UpdateCheckCallback {
