@@ -1,18 +1,16 @@
 # Rentool
 
-An Android application to extract and create Ren'Py RPA files directly on your device.
+An Android application to extract and create Ren'Py RPA archives and decompile RPYC scripts directly on your device.
 
 ## Features
 
 - **Extract RPA Archives**: Unpack Ren'Py game archives to access images, scripts, audio, and other assets
 - **Create RPA Archives**: Package files and folders into RPA v3 format archives
-- **Batch Operations**:
-  - Extract multiple RPA files at once to a shared destination folder
-  - Combine multiple files/folders into a single RPA archive
+- **Decompile RPYC Scripts**: Convert compiled .rpyc files back to readable .rpy source scripts
+- **Batch Operations**: Extract multiple RPA files or decompile multiple RPYC files at once
 - **Multi-Select Support**: Long-press to select multiple files or folders for batch operations
 - **Smart Directory Defaults**: Output directory automatically defaults to the location of selected input files
-- **Direct File Path Access**: Uses direct filesystem access for fast operations
-- **Real-time Progress Tracking**: View extraction/creation progress with file counts, speed, and ETA
+- **Real-time Progress Tracking**: View extraction/creation/decompilation progress with file counts, speed, and ETA
 
 ## Requirements
 
@@ -62,7 +60,7 @@ An Android application to extract and create Ren'Py RPA files directly on your d
 
 ### Chaquopy Python Configuration
 
-The project uses [Chaquopy](https://chaquo.com/chaquopy/) to integrate Python for RPA archive handling. Chaquopy will automatically detect your Python installation during build.
+The project uses [Chaquopy](https://chaquo.com/chaquopy/) to integrate Python for RPA archive operations and RPYC decompilation. Chaquopy will automatically detect your Python installation during build.
 
 If auto-detection fails, you can manually specify your Python path in `app/build.gradle`:
 ```gradle
@@ -93,17 +91,15 @@ python {
 4. Wait for creation to complete
 5. The RPA file will be created in the parent directory of selected items
 
-### Batch Operations
+### Decompiling RPYC Scripts
 
-**Batch Extraction:**
-- Select multiple RPA files
-- All files are extracted sequentially to the same destination folder
-- Progress shows current file (e.g., "Extracting RPA... (2 of 5)")
-
-**Batch Creation:**
-- Select multiple files/folders
-- All items are combined into a single RPA archive
-- Files maintain their directory structure in the archive
+1. Tap the **"Decompile RPYC"** card
+2. Browse and select one or more `.rpyc` files:
+   - Single tap: Select one file
+   - Long-press: Enter multi-select mode to choose multiple files
+3. Select the destination folder (defaults to the folder containing the RPYC files)
+4. Wait for decompilation to complete
+5. Decompiled `.rpy` files will be saved to the chosen directory
 
 ## Technical Details
 
@@ -132,6 +128,7 @@ python {
 - **UI Framework**: Material Design 3
 - **Python Integration**: Chaquopy
 - **RPA Library**: rpatool.py
+- **Decompiler**: unrpyc
 - **File Picker**: Custom RecyclerView-based picker with multi-select
 
 ## Credits
@@ -141,6 +138,7 @@ python {
 - **Folder Icons**: [Icons8](https://icons8.com/)
 - **Rpatool**: [Shizmob](https://codeberg.org/shiz/rpatool)
 - **Unrpyc**: [CensoredUsername](https://github.com/CensoredUsername/unrpyc)
+
 ## License
 
 This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
