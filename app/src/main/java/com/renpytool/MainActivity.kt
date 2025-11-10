@@ -15,12 +15,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -71,7 +71,14 @@ class MainActivity : ComponentActivity() {
 
         // Set up Compose UI
         setContent {
-            RenpytoolTheme {
+            val themeMode by viewModel.themeMode.collectAsState()
+            val darkTheme = when (themeMode) {
+                MainViewModel.ThemeMode.LIGHT -> false
+                MainViewModel.ThemeMode.DARK -> true
+                MainViewModel.ThemeMode.SYSTEM -> isSystemInDarkTheme()
+            }
+
+            RenpytoolTheme(darkTheme = darkTheme) {
                 MainScreen()
             }
         }
@@ -91,6 +98,7 @@ class MainActivity : ComponentActivity() {
         val decompileStatus by viewModel.decompileStatus.collectAsState()
         val editStatus by viewModel.editStatus.collectAsState()
         val cardsEnabled by viewModel.cardsEnabled.collectAsState()
+        val themeMode by viewModel.themeMode.collectAsState()
 
         MainScreenContent(
             extractStatus = extractStatus,
@@ -102,15 +110,12 @@ class MainActivity : ComponentActivity() {
             onCreateClick = { startCreateFlow() },
             onDecompileClick = { startDecompileFlow() },
             onEditClick = { startEditRpyFlow() },
-            onMenuClick = { showOptionsMenu() },
+            themeMode = themeMode,
+            onThemeModeChange = { mode -> viewModel.setThemeMode(mode) },
             modifier = Modifier.fillMaxSize()
         )
     }
 
-    private fun showOptionsMenu() {
-        // Placeholder for options menu - can add GitHub link, about, etc.
-        Toast.makeText(this, "Menu", Toast.LENGTH_SHORT).show()
-    }
 
     private fun checkPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {

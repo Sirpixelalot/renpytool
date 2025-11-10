@@ -48,6 +48,22 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _cardsEnabled = MutableStateFlow(true)
     val cardsEnabled: StateFlow<Boolean> = _cardsEnabled.asStateFlow()
 
+    // Theme mode state
+    enum class ThemeMode {
+        SYSTEM, LIGHT, DARK;
+
+        companion object {
+            fun fromString(value: String): ThemeMode {
+                return values().find { it.name == value } ?: SYSTEM
+            }
+        }
+    }
+
+    private val _themeMode = MutableStateFlow(
+        ThemeMode.fromString(prefs.getString("theme_mode", ThemeMode.SYSTEM.name) ?: ThemeMode.SYSTEM.name)
+    )
+    val themeMode: StateFlow<ThemeMode> = _themeMode.asStateFlow()
+
     init {
         // Load edit status from SharedPreferences
         updateEditStatus()
@@ -534,5 +550,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
         file.delete()
+    }
+
+    /**
+     * Set the theme mode and save to preferences
+     */
+    fun setThemeMode(mode: ThemeMode) {
+        _themeMode.value = mode
+        prefs.edit().putString("theme_mode", mode.name).apply()
     }
 }

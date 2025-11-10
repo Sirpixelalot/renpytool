@@ -3,6 +3,10 @@ package com.renpytool.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -87,7 +91,8 @@ fun MainScreenContent(
     onCreateClick: () -> Unit,
     onDecompileClick: () -> Unit,
     onEditClick: () -> Unit,
-    onMenuClick: () -> Unit,
+    themeMode: com.renpytool.MainViewModel.ThemeMode,
+    onThemeModeChange: (com.renpytool.MainViewModel.ThemeMode) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -95,12 +100,10 @@ fun MainScreenContent(
             TopAppBar(
                 title = { Text("Rentool") },
                 actions = {
-                    IconButton(onClick = onMenuClick) {
-                        Icon(
-                            painter = painterResource(id = android.R.drawable.ic_menu_more),
-                            contentDescription = "Menu"
-                        )
-                    }
+                    ThemeMenuButton(
+                        themeMode = themeMode,
+                        onThemeModeChange = onThemeModeChange
+                    )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -152,6 +155,77 @@ fun MainScreenContent(
                 iconRes = com.renpytool.R.drawable.ic_edit_rpy,
                 enabled = cardsEnabled,
                 onClick = onEditClick
+            )
+        }
+    }
+}
+
+/**
+ * Theme menu button with dropdown
+ */
+@Composable
+fun ThemeMenuButton(
+    themeMode: com.renpytool.MainViewModel.ThemeMode,
+    onThemeModeChange: (com.renpytool.MainViewModel.ThemeMode) -> Unit
+) {
+    var menuExpanded by remember { mutableStateOf(false) }
+
+    Box {
+        IconButton(onClick = { menuExpanded = true }) {
+            Icon(
+                painter = painterResource(id = android.R.drawable.ic_menu_more),
+                contentDescription = "Menu"
+            )
+        }
+
+        DropdownMenu(
+            expanded = menuExpanded,
+            onDismissRequest = { menuExpanded = false }
+        ) {
+            DropdownMenuItem(
+                text = { Text("System Default") },
+                onClick = {
+                    onThemeModeChange(com.renpytool.MainViewModel.ThemeMode.SYSTEM)
+                    menuExpanded = false
+                },
+                trailingIcon = {
+                    if (themeMode == com.renpytool.MainViewModel.ThemeMode.SYSTEM) {
+                        Icon(
+                            painter = painterResource(id = android.R.drawable.checkbox_on_background),
+                            contentDescription = null
+                        )
+                    }
+                }
+            )
+            DropdownMenuItem(
+                text = { Text("Light Mode") },
+                onClick = {
+                    onThemeModeChange(com.renpytool.MainViewModel.ThemeMode.LIGHT)
+                    menuExpanded = false
+                },
+                trailingIcon = {
+                    if (themeMode == com.renpytool.MainViewModel.ThemeMode.LIGHT) {
+                        Icon(
+                            painter = painterResource(id = android.R.drawable.checkbox_on_background),
+                            contentDescription = null
+                        )
+                    }
+                }
+            )
+            DropdownMenuItem(
+                text = { Text("Dark Mode") },
+                onClick = {
+                    onThemeModeChange(com.renpytool.MainViewModel.ThemeMode.DARK)
+                    menuExpanded = false
+                },
+                trailingIcon = {
+                    if (themeMode == com.renpytool.MainViewModel.ThemeMode.DARK) {
+                        Icon(
+                            painter = painterResource(id = android.R.drawable.checkbox_on_background),
+                            contentDescription = null
+                        )
+                    }
+                }
             )
         }
     }
