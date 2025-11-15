@@ -36,3 +36,5 @@ __pycache__/
 *.jks
 keystore.properties
 git token.txt
+*.kate-swp
+.*.swp
