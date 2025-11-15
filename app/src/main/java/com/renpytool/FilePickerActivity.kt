@@ -129,8 +129,8 @@ class FilePickerActivity : ComponentActivity() {
 
         if (openEditor && file.name.endsWith(".rpy")) {
             // Open .rpy file in editor
-            val editorIntent = Intent(this, RpyEditorActivity::class.java)
-            editorIntent.putExtra(RpyEditorActivity.EXTRA_FILE_PATH, file.absolutePath)
+            val editorIntent = Intent(this, RpyEditorActivityNew::class.java)
+            editorIntent.putExtra(RpyEditorActivityNew.EXTRA_FILE_PATH, file.absolutePath)
             startActivity(editorIntent)
             finish()
         } else {

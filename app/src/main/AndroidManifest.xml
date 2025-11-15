@@ -47,6 +47,12 @@
             android:theme="@style/Theme.Rentool" />
 
         <activity
+            android:name=".RpyEditorActivityNew"
+            android:exported="false"
+            android:theme="@style/Theme.Rentool" />
+
+        <!-- Old editor activity (backup) -->
+        <activity
             android:name=".RpyEditorActivity"
             android:exported="false"
             android:theme="@style/Theme.Rentool" />

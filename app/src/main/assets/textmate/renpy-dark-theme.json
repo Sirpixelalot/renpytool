@@ -2,12 +2,12 @@
   "name": "Ren'Py Dark Theme",
   "type": "dark",
   "colors": {
-    "editor.background": "#141218",
+    "editor.background": "#1C1B1F",
     "editor.foreground": "#E6E0E9",
-    "editorLineNumber.foreground": "#E6E0E9",
-    "editorLineNumber.background": "#141218",
-    "editor.lineHighlightBackground": "#1D1B20",
-    "editor.selectionBackground": "#4A4458"
+    "editorLineNumber.foreground": "#CAC4D0",
+    "editorLineNumber.background": "#1C1B1F",
+    "editor.lineHighlightBackground": "#28262E",
+    "editor.selectionBackground": "#BB86FC33"
   },
   "tokenColors": [
     {
