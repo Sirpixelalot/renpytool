@@ -443,24 +443,22 @@ class MainActivity : ComponentActivity() {
         val currentVersion = getAppVersion()
         android.util.Log.d("MainActivity", "Current app version: $currentVersion")
 
-        // Use lifecycleScope for coroutine instead of ExecutorService
+        // Use lifecycleScope for coroutine
         lifecycleScope.launch {
-            UpdateChecker.checkForUpdates(currentVersion, object : UpdateChecker.UpdateCheckCallback {
-                override fun onUpdateAvailable(versionInfo: VersionInfo) {
-                    android.util.Log.d("MainActivity", "Update available: ${versionInfo.versionTag}")
-                    runOnUiThread { showUpdateDialog(versionInfo) }
+            when (val result = UpdateChecker.checkForUpdates(currentVersion)) {
+                is UpdateChecker.UpdateResult.UpdateAvailable -> {
+                    android.util.Log.d("MainActivity", "Update available: ${result.versionInfo.versionTag}")
+                    showUpdateDialog(result.versionInfo)
                 }
-
-                override fun onNoUpdateAvailable() {
+                is UpdateChecker.UpdateResult.NoUpdateAvailable -> {
                     android.util.Log.d("MainActivity", "No update available")
                     // Silent - no action needed
                 }
-
-                override fun onCheckFailed(error: String) {
-                    android.util.Log.e("MainActivity", "Update check failed: $error")
+                is UpdateChecker.UpdateResult.CheckFailed -> {
+                    android.util.Log.e("MainActivity", "Update check failed: ${result.error}")
                     // Silent fail - don't bother user with network errors
                 }
-            })
+            }
         }
     }
 
